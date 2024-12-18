@@ -1,0 +1,13 @@
+# Executable
+nl_shell
+
+# Compiler
+*.o
+*.d
+*.out
+core
+
+# Vim/Neovim
+*.swp 
+*.swo
+*~
