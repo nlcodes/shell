@@ -12,7 +12,7 @@ int main() {
 
   while(1) {
     /* Display shell prompt and collect user input */
-    printf("shell>");
+    printf("shell>> ");
     fflush(stdout);
     fgets(input, 100, stdin);
     
@@ -35,10 +35,20 @@ int main() {
     }
     clargs[i] = NULL;
 
-    /* Test print tokens */
-    printf("Tokens:\n");
-    for(int j = 0; clargs[j] != NULL; j++) {
-      printf("arg: %s\n", clargs[j]);
+    /* Fork and execute commands */
+    pid_t pid = fork();
+    
+    if (pid < 0) {
+      perror("fork failure");
+      continue;
+    }
+    else if (pid == 0) {
+      execvp(clargs[0], clargs);
+      perror("command failed");
+      exit(EXIT_FAILURE);
+    }
+    else {
+      wait(NULL);
     }
   }
 
