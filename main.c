@@ -16,10 +16,12 @@ int main() {
     fflush(stdout);
     fgets(input, 100, stdin);
     
-    /* Remove newline and implement exit command */
+    /* Remove newline and implement exit and clear command */
     input[strcspn(input, "\n")] = 0;
     if (strcmp(input, "exit") == 0) {
       break;
+    } else if (strcmp(input, "clear") == 0) {
+      printf("\033[H\033[J");
     }
 
     /* Create array of pointers to store command line arguments */
